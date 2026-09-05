@@ -9,7 +9,9 @@ This repository is a fork of [Egzumer custom firmware](https://github.com/egzume
 All is a cloned and customized version of DualTachyon's open firmware found [here](https://github.com/DualTachyon/uv-k5-firmware) ... a cool achievement !
 
 > [!NOTE]
-> EN - About Chirp, as many others firmwares, you need to use a dedicated driver available on [this repository](https://github.com/armel/uv-k5-chirp-driver). 
+> TR - CHIRP ile telsize kanal ve ayar yüklemek için bu projenin Release (Sürümler) kısmında ve ana dizininde yer alan `uvk5_f4hwn_chirp.py` sürücüsünü kullanmanız gerekmektedir. CHIRP'te **Help (Yardım)** -> **Load Module from Issue/File (Modül Yükle)** menüsünden `uvk5_f4hwn_chirp.py` dosyasını seçerek telsizinizi sorunsuz programlayabilirsiniz.
+>
+> EN - About Chirp, as many others firmwares, you need to use a dedicated driver available on [this repository](https://github.com/armel/uv-k5-chirp-driver) or directly download `uvk5_f4hwn_chirp.py` from this repo / releases. 
 >
 > _FR - A propos de Chirp, comme beaucoup d'autres firmwares, vous devez utiliser un pilote dédié disponible sur [ce dépôt](https://github.com/armel/uv-k5-chirp-driver)._
 

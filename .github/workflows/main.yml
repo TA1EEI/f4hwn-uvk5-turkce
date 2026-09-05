@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,4 +25,40 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: f4hwn-turkce-tum-surumler
-        path: compiled-firmware/*.packed.bin
+        path: |
+          compiled-firmware/*.packed.bin
+          uvk5_f4hwn_chirp.py
+
+    - name: Create or Update GitHub Release
+      uses: softprops/action-gh-release@v2
+      with:
+        tag_name: v4.3-turkce
+        name: "UV-K5 F4HWN v4.3 Turkce (TA1EEI)"
+        body: |
+          # Quansheng UV-K5(8) F4HWN v4.3 Türkçe Sürümleri
+
+          Bu sürümde tüm menüler, ekran bildirimleri ve sistem mesajları Türkçe'ye uyarlanmıştır (128x64 LCD ekranda karakter bozulmalarını önlemek amacıyla 7-bit ASCII standardına uygun olarak tasarlanmıştır).
+
+          ### 📦 Dahil Edilen Türkçe Sürümler:
+          - **f4hwn_broadcast_v4.3_turkce.packed.bin**: FM Ticari Radyo alıcısı destekli standart sürüm.
+          - **f4hwn_bandscope_v4.3_turkce.packed.bin**: Fagci Spektrum Analizör odaklı sürüm.
+          - **f4hwn_rescueops_v4.3_turkce.packed.bin**: Arama-kurtarma ve acil durum operasyonlarına özel sürüm.
+          - **f4hwn_basic_v4.3_turkce.packed.bin**: Hafifletilmiş, temel özellikli sade sürüm.
+          - **f4hwn_game_v4.3_turkce.packed.bin**: Breakout mini oyunu içeren sürüm.
+
+          ---
+
+          ### 📻 CHIRP ile Kanal Yükleme ve Programlama:
+          CHIRP üzerinden telsizinize kanal yazabilmek/okuyabilmek için ekteki Python sürücü modülünü yüklemeniz gerekmektedir:
+          1. Ekteki `uvk5_f4hwn_chirp.py` dosyasını bilgisayarınıza indirin.
+          2. **CHIRP** uygulamasını açın.
+          3. Menüden **Help (Yardım)** -> **Load Module from Issue... (veya Load Module from File...)** seçeneğine tıklayın.
+          4. İndirdiğiniz `uvk5_f4hwn_chirp.py` dosyasını seçin.
+          5. Artık Radio -> Download/Upload to Radio menüsünden Quansheng UV-K5 (F4HWN) seçerek kanallarınızı güvenle yükleyebilirsiniz!
+        draft: false
+        prerelease: false
+        files: |
+          compiled-firmware/*.packed.bin
+          uvk5_f4hwn_chirp.py
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
