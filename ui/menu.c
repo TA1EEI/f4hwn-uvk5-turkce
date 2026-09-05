@@ -136,7 +136,7 @@ const t_menu_item MenuList[] =
     {"Pil V",       MENU_VOL           }, // was "VOL"
 #endif
     {"Rx Mod",      MENU_TDR           },
-    {"Esik",        MENU_SQL           },
+    {"SQL",         MENU_SQL           },
 #ifdef ENABLE_FEAT_F4HWN
     {"AyrGuc",      MENU_SET_PWR       },
     {"AyrPTT",      MENU_SET_PTT       },

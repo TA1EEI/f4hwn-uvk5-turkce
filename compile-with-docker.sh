@@ -51,7 +51,7 @@ clean() {
 custom() {
     echo "🔧 Compiling Custom..."
     docker run -v "$FIRMWARE_DIR:/app/compiled-firmware" "$IMAGE_NAME" /bin/bash -c "\
-        rm -f ./compiled-firmware/* && cd /app && make -s \
+        cd /app && make clean && make -s \
         EDITION_STRING=Custom \
         TARGET=f4hwn.custom \
         && cp f4hwn.custom* compiled-firmware/"
@@ -60,7 +60,7 @@ custom() {
 standard() {
     echo "📦 Compiling Standard..."
     docker run -v "$FIRMWARE_DIR:/app/compiled-firmware" "$IMAGE_NAME" /bin/bash -c "\
-        rm -f ./compiled-firmware/* && cd /app && make -s \
+        cd /app && make clean && make -s \
         ENABLE_SPECTRUM=0 \
         ENABLE_FMRADIO=0 \
         ENABLE_AIRCOPY=0 \
@@ -73,7 +73,7 @@ standard() {
 bandscope() {
     echo "📺 Compiling Bandscope..."
     docker run -v "$FIRMWARE_DIR:/app/compiled-firmware" "$IMAGE_NAME" /bin/bash -c "\
-        rm -f ./compiled-firmware/* && cd /app && make -s \
+        cd /app && make clean && make -s \
         ENABLE_SPECTRUM=1 \
         ENABLE_FMRADIO=0 \
         ENABLE_VOX=0 \
@@ -92,7 +92,7 @@ bandscope() {
 broadcast() {
     echo "📻 Compiling Broadcast..."
     docker run -v "$FIRMWARE_DIR:/app/compiled-firmware" "$IMAGE_NAME" /bin/bash -c "\
-        cd /app && make -s \
+        cd /app && make clean && make -s \
         ENABLE_SPECTRUM=0 \
         ENABLE_FMRADIO=1 \
         ENABLE_VOX=1 \
@@ -111,7 +111,7 @@ broadcast() {
 basic() {
     echo "☘️ Compiling Basic..."
     docker run -v "$FIRMWARE_DIR:/app/compiled-firmware" "$IMAGE_NAME" /bin/bash -c "\
-        cd /app && make -s \
+        cd /app && make clean && make -s \
         ENABLE_SPECTRUM=1 \
         ENABLE_FMRADIO=1 \
         ENABLE_VOX=0 \
@@ -136,7 +136,7 @@ basic() {
 rescueops() {
     echo "🚨 Compiling RescueOps..."
     docker run -v "$FIRMWARE_DIR:/app/compiled-firmware" "$IMAGE_NAME" /bin/bash -c "\
-        cd /app && make -s \
+        cd /app && make clean && make -s \
         ENABLE_SPECTRUM=0 \
         ENABLE_FMRADIO=0 \
         ENABLE_VOX=1 \
@@ -155,7 +155,7 @@ rescueops() {
 game() {
     echo "🎮 Compiling Game..."
     docker run -v "$FIRMWARE_DIR:/app/compiled-firmware" "$IMAGE_NAME" /bin/bash -c "\
-        cd /app && make -s \
+        cd /app && make clean && make -s \
         ENABLE_SPECTRUM=0 \
         ENABLE_FMRADIO=1 \
         ENABLE_VOX=0 \
@@ -184,9 +184,10 @@ case "$1" in
     all)
         bandscope
         broadcast
-        basic
         rescueops
+        basic
         game
+        custom
         ;;
     *)
         echo "Usage: BASE=alpine:<tag> $0 {clean|custom|standard|bandscope|broadcast|basic|rescueops|game|all}"
