@@ -71,12 +71,12 @@ const int8_t dBmCorrTable[7] = {
 
 const char *VfoStateStr[] = {
        [VFO_STATE_NORMAL]="",
-       [VFO_STATE_BUSY]="BUSY",
-       [VFO_STATE_BAT_LOW]="BAT LOW",
-       [VFO_STATE_TX_DISABLE]="TX DISABLE",
-       [VFO_STATE_TIMEOUT]="TIMEOUT",
+       [VFO_STATE_BUSY]="MESGUL",
+       [VFO_STATE_BAT_LOW]="DUSUK PIL",
+       [VFO_STATE_TX_DISABLE]="TX ENGEL",
+       [VFO_STATE_TIMEOUT]="ZMN ASM",
        [VFO_STATE_ALARM]="ALARM",
-       [VFO_STATE_VOLTAGE_HIGH]="VOLT HIGH"
+       [VFO_STATE_VOLTAGE_HIGH]="YUKSEK V"
 };
 
 // ***************************************************************************
@@ -535,7 +535,7 @@ void UI_DisplayMain(void)
     UI_DisplayClear();
 
     if(gLowBattery && !gLowBatteryConfirmed) {
-        UI_DisplayPopup("LOW BATTERY");
+        UI_DisplayPopup("DUSUK PIL");
         ST7565_BlitFullScreen();
         return;
     }
@@ -543,8 +543,8 @@ void UI_DisplayMain(void)
 #ifndef ENABLE_FEAT_F4HWN
     if (gEeprom.KEY_LOCK && gKeypadLocked > 0)
     {   // tell user how to unlock the keyboard
-        UI_PrintString("Long press #", 0, LCD_WIDTH, 1, 8);
-        UI_PrintString("to unlock",    0, LCD_WIDTH, 3, 8);
+        UI_PrintString("# Basili Tut", 0, LCD_WIDTH, 1, 8);
+        UI_PrintString("Kilit Acilsin", 0, LCD_WIDTH, 3, 8);
         ST7565_BlitFullScreen();
         return;
     }
@@ -565,7 +565,7 @@ void UI_DisplayMain(void)
             shift = 5;
         }
         //memcpy(gFrameBuffer[shift] + 2, gFontKeyLock, sizeof(gFontKeyLock));
-        UI_PrintStringSmallBold("UNLOCK KEYBOARD", 12, 0, shift);
+        UI_PrintStringSmallBold("KLAVYE ACILDI", 16, 0, shift);
         //memcpy(gFrameBuffer[shift] + 120, gFontKeyLock, sizeof(gFontKeyLock));
 
         /*
@@ -1212,7 +1212,7 @@ void UI_DisplayMain(void)
 
             if (gSetting_set_gui)
             {
-                const char pwr_short[][3] = {"L1", "L2", "L3", "L4", "L5", "M", "H"};
+                const char pwr_short[][3] = {"D1", "D2", "D3", "D4", "D5", "O", "Y"};
                 //sprintf(String, "%s", pwr_short[currentPower]);
                 //UI_PrintStringSmallNormal(String, LCD_WIDTH + 42, 0, line + 1);
                 UI_PrintStringSmallNormal(pwr_short[currentPower], LCD_WIDTH + 42, 0, line + 1);
@@ -1221,7 +1221,7 @@ void UI_DisplayMain(void)
             }
             else
             {
-                const char pwr_long[][5] = {"LOW1", "LOW2", "LOW3", "LOW4", "LOW5", "MID", "HIGH"};
+                const char pwr_long[][5] = {"DUS1", "DUS2", "DUS3", "DUS4", "DUS5", "ORTA", "YUK "};
                 //sprintf(String, "%s", pwr_long[currentPower]);
                 //GUI_DisplaySmallest(String, 24, line == 0 ? 17 : 49, false, true);
                 GUI_DisplaySmallest(pwr_long[currentPower], 24, line == 0 ? 17 : 49, false, true);

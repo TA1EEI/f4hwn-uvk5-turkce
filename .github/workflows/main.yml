@@ -3,6 +3,7 @@ name: Build Firmware
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   build:
@@ -10,15 +11,17 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Compile firmware
       run: |
         chmod +x compile-with-docker.sh
-        ./compile-with-docker.sh
+        ./compile-with-docker.sh custom
+        ./compile-with-docker.sh bandscope
+        ./compile-with-docker.sh broadcast
 
     - name: Upload firmware artifact
       uses: actions/upload-artifact@v4
       with:
-        name: firmware-artifact
-        path: compiled-firmware/f4hwn.packed.bin
+        name: f4hwn-turkce-firmware
+        path: compiled-firmware/*.bin

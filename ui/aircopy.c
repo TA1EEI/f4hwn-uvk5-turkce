@@ -44,11 +44,11 @@ void UI_DisplayAircopy(void)
     UI_DisplayClear();
 
     if (gAircopyState == AIRCOPY_READY) {
-        pPrintStr = "AIR COPY(RDY)";
+        pPrintStr = "KBLOSUZ(HAZ)";
     } else if (gAircopyState == AIRCOPY_TRANSFER) {
-        pPrintStr = "AIR COPY";
+        pPrintStr = "KBLOSUZ KPY";
     } else {
-        pPrintStr = "AIR COPY(CMP)";
+        pPrintStr = "KBLOSUZ(TAM)";
         gAircopyState = AIRCOPY_READY;
     }
 
@@ -73,9 +73,9 @@ void UI_DisplayAircopy(void)
     percent = (gAirCopyBlockNumber * 10000) / 120;
 
     if (gAirCopyIsSendMode == 0) {
-        sprintf(String, "RCV:%02u.%02u%% E:%d", percent / 100, percent % 100, gErrorsDuringAirCopy);
+        sprintf(String, "ALIS:%02u.%02u%% H:%d", percent / 100, percent % 100, gErrorsDuringAirCopy);
     } else if (gAirCopyIsSendMode == 1) {
-        sprintf(String, "SND:%02u.%02u%%", percent / 100, percent % 100);
+        sprintf(String, "GNDR:%02u.%02u%%", percent / 100, percent % 100);
     }
 
     // Draw gauge

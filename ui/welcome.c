@@ -40,8 +40,8 @@ void UI_DisplayReleaseKeys(void)
 #endif
     UI_DisplayClear();
 
-    UI_PrintString("RELEASE", 0, 127, 1, 10);
-    UI_PrintString("ALL KEYS", 0, 127, 3, 10);
+    UI_PrintString("TUSLARI", 0, 127, 1, 10);
+    UI_PrintString("BIRAKIN", 0, 127, 3, 10);
 
     ST7565_BlitStatusLine();  // blank status line
     ST7565_BlitFullScreen();
@@ -85,14 +85,14 @@ void UI_DisplayWelcome(void)
 
         if (gEeprom.POWER_ON_DISPLAY_MODE == POWER_ON_DISPLAY_MODE_VOLTAGE)
         {
-            strcpy(WelcomeString0, "VOLTAGE");
+            strcpy(WelcomeString0, "VOLTAJ");
             strcpy(WelcomeString1, WelcomeString2);
         }
         else if(gEeprom.POWER_ON_DISPLAY_MODE == POWER_ON_DISPLAY_MODE_ALL)
         {
             if(strlen(WelcomeString0) == 0 && strlen(WelcomeString1) == 0)
             {
-                strcpy(WelcomeString0, "WELCOME");
+                strcpy(WelcomeString0, "HOSGELDINIZ");
                 strcpy(WelcomeString1, WelcomeString2);
             }
             else if(strlen(WelcomeString0) == 0 || strlen(WelcomeString1) == 0)
@@ -108,12 +108,12 @@ void UI_DisplayWelcome(void)
         {
             if(strlen(WelcomeString0) == 0)
             {
-                strcpy(WelcomeString0, "WELCOME");
+                strcpy(WelcomeString0, "HOSGELDINIZ");
             }
 
             if(strlen(WelcomeString1) == 0)
             {
-                strcpy(WelcomeString1, "BIENVENUE");
+                strcpy(WelcomeString1, "TA1EEI TR");
             }
         }
 
@@ -130,7 +130,7 @@ void UI_DisplayWelcome(void)
             gFrameBuffer[4][i] ^= 0xFF;
         }
 
-        sprintf(WelcomeString3, "%s Edition", Edition);
+        sprintf(WelcomeString3, "%s Surumu", Edition);
         UI_PrintStringSmallNormal(WelcomeString3, 0, 127, 6);
 
         /*
